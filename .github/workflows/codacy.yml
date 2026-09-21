@@ -41,7 +41,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -e ./rosemary
-
+        
+    - name: Verificar paquetes de Python obsoletos
+      run: pip list --outdated
+      continue-on-error: true
+      
     - name: Run tests with coverage
       run: |
         coverage run -m pytest app/features/ --ignore-glob='*selenium*'
